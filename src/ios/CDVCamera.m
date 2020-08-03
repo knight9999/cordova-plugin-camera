@@ -540,7 +540,12 @@ static NSString* toBase64(NSData* data) {
                     [weakSelf.commandDelegate sendPluginResult:res callbackId:cameraPicker.callbackId];
                     weakSelf.hasPendingOperation = NO;
                     weakSelf.pickerController = nil;
-                }
+                } else if ([self usesGeolocation] || self.pickerController.pictureOptions.destinationType == DestinationTypeNativeUri) {
+                    [weakSelf.commandDelegate sendPluginResult:res callbackId:cameraPicker.callbackId];
+                    weakSelf.hasPendingOperation = NO;
+                    weakSelf.pickerController = nil;
+                };
+
             }];
         }
         else {
